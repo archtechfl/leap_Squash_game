@@ -124,7 +124,7 @@ function takeALeap() {
 				yPos = hand.palmPosition[1];
 				zPos = hand.palmPosition[2];
 
-				//sendData(xPos,yPos,zPos);
+				console.log(yPos);
 
 				//console.log("x: " + xPos + " y: " + yPos + " z: " + zPos);
 
@@ -314,8 +314,8 @@ function movement()
 function movePaddle() {
 	
 	paddle1.position.x = xPos * 0.1;
-	paddle1.position.y = yPos * 0.05;
-	paddle1.position.z = zPos * 0.01;
+	paddle1.position.y = (yPos * 0.05) + courtBottom;
+	paddle1.position.z = zPos * 0.03;
 	
 }//end move paddle
 
