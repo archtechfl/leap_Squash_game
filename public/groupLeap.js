@@ -113,8 +113,8 @@ function takeALeap() {
 		 
 				var pointable = frame.pointables[index];
 				
-				console.log("Number of hands: " + frame.hands.length);
-				console.log("Number of fingers: " + frame.fingers.length);
+				//console.log("Number of hands: " + frame.hands.length);
+				//console.log("Number of fingers: " + frame.fingers.length);
 				
 				//Conver tip position to cube position
 				xPos = pointable.tipPosition[0];
