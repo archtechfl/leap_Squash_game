@@ -33,7 +33,8 @@ window.onload = function() {
 	score1 = 0,
 	score2 = 0,
 	maxScore = 21,
-	currentScore = 0,
+	currentScore1 = 0,
+	currentScore2 = 0,
 	xPos = 0,
 	yPos = 0,
 	zPos = 0,
@@ -163,12 +164,12 @@ function init(){
 		material_ball = new THREE.MeshBasicMaterial( { color: 0xCC0000, wireframe: false} );
 
 		// create the paddle1's material
-		var paddle1Material = new THREE.MeshBasicMaterial({color: 0x1B32C0, wireframe: true});
+		var paddle1Material = new THREE.MeshBasicMaterial({color: 0x1B32C0, wireframe: false});
   		// create the paddle2's material
-		var paddle2Material = new THREE.MeshBasicMaterial({color: 0x521B6B, wireframe: true});
+		var paddle2Material = new THREE.MeshBasicMaterial({color: 0x521B6B, wireframe: false});
 
-		paddleWidth = 20;
-	 	paddleHeight = 20;
+		paddleWidth = 10;
+	 	paddleHeight = 10;
       		paddleDepth = 1;
       		paddleQuality = 1;
       		
@@ -288,6 +289,7 @@ function render()
 function movement() 
 	{
 
+			console.log("paddle 1 x: " + paddle1.position.x);
 			ball.children[0].position.x += xSpeed;
 			ball.children[0].position.y += ySpeed;
 			ball.children[0].position.z += zSpeed;
@@ -307,7 +309,7 @@ function movement()
 					zSpeed *= -1;
 				} 
 			//start AR
-			  if (ball.children[0].position.x <= paddle1.position.x + paddleWidth
+			if (ball.children[0].position.x <= paddle1.position.x + paddleWidth
 			  &&  ball.children[0].position.x >= paddle1.position.x)
 			  {
 			    // and if ball is aligned with paddle1 on y plane
@@ -317,6 +319,7 @@ function movement()
 			      // and if ball is travelling towards player 
 			      if (zSpeed > 0)
 			      {
+					console.log("hit!");
 			        currentScore1++;
 			        matchScoreCheck();
 			        // stretch the paddle to indicate 
@@ -358,7 +361,7 @@ function movePaddle() {
 	var vAF = 1.7;
 	paddle1.position.x = xPos * 0.3;
 	paddle1.position.y = (yPos * 0.11) + (courtBottom * vAF);
-	paddle1.position.z = zPos * 0.03;
+	paddle1.position.z = zPos * 0.5;
 	
 }//end move paddle
 
