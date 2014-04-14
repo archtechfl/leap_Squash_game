@@ -157,9 +157,9 @@ function init(){
   		// create the paddle2's material
 		var paddle2Material = new THREE.MeshBasicMaterial({color: 0x521B6B, wireframe: false});
 
-		paddleWidth = 8;
-	 	paddleHeight = 5;
-      		paddleDepth = 2;
+		paddleWidth = 6;
+	 	paddleHeight = 3.75;
+      		paddleDepth = 1;
       		paddleQuality = 1;
       		
       		paddle1 = new THREE.Mesh(
@@ -208,7 +208,7 @@ function drawCourt () {
 
 	//console.log("drawCourt");
 
-	courtWidth = 60;
+	courtWidth = 55;
 	courtDepth = 150;
 	zPosCourt = 0;
 	courtBottom = -12;
