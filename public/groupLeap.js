@@ -262,18 +262,6 @@ function addPaddles() {
 
 }//end of add paddles
 
-function setSpeed () {
-
-		//console.log("setSpeed");
-
-		xSpeed = Math.random() * 1;
-		zSpeed = 1.3;
-		ySpeed = Math.random() * 1;
-
-		console.log("x speed: " + xSpeed + " y speed: " + ySpeed  + " z speed: " + zSpeed);
-
-	}//end of set speed
-
 function render() 
 
 		{
