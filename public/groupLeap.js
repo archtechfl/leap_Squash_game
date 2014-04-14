@@ -147,7 +147,7 @@ function init(){
 		renderer.setSize( window.innerWidth, window.innerHeight );
 		document.body.appendChild(renderer.domElement);
 
-		geometry = new THREE.SphereGeometry( 2, 32, 32 );
+		geometry = new THREE.SphereGeometry( 1.5, 32, 32 );
 
 		material = new THREE.MeshBasicMaterial( { color: 0xBABABA, wireframe: true} );
 		material_ball = new THREE.MeshBasicMaterial( { color: 0xCC0000, wireframe: false} );
