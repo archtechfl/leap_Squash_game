@@ -313,7 +313,7 @@ function movement()
 	
 function movePaddle() {
 	
-	var vAF = 2;
+	var vAF = 1.5;
 	paddle1.position.x = xPos * 0.1;
 	paddle1.position.y = (yPos * 0.05) + (courtBottom * vAF);
 	paddle1.position.z = zPos * 0.03;
