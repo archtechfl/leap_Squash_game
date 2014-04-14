@@ -79,7 +79,7 @@ window.onload = function() {
 	socket.on('sendOutData', function (data) 
     	{
     	
-    		console.log("Data: " + data.id + ' ' + data.coord[0]);
+    		//console.log("Data: " + data.id + ' ' + data.coord[0]);
 
     	});
 			
@@ -135,7 +135,7 @@ function takeALeap() {
 				yPos = hand.palmPosition[1];
 				zPos = hand.palmPosition[2];
 
-				console.log(yPos);
+				//console.log(yPos);
 
 				//console.log("x: " + xPos + " y: " + yPos + " z: " + zPos);
 
@@ -289,7 +289,7 @@ function render()
 function movement() 
 	{
 
-			console.log("paddle 1 x: " + paddle1.position.x);
+			//console.log("paddle 1 x: " + paddle1.position.x);
 			ball.children[0].position.x += xSpeed;
 			ball.children[0].position.y += ySpeed;
 			ball.children[0].position.z += zSpeed;
