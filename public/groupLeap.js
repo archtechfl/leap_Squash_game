@@ -322,14 +322,13 @@ function movement()
 			      {
 			        currentScore1++;
 			        matchScoreCheck();
-			        // stretch the paddle to indicate a hit
-			        paddle1.color = #27A60E;
+			        // stretch the paddle to indicate 
 			        // switch direction of ball travel to create bounce
-			        xSpeed = -xSpeed;
+			        zSpeed *= -1;
 			        // we impact ball angle when hitting it
 			        // this is not realistic physics, just spices up the gameplay
 			        // allows you to 'slice' the ball to beat the opponent
-			        ySpeed -= paddle1DirY * 0.7;
+			
 			      }
 			    }
 			  }//paddle1 1 end
