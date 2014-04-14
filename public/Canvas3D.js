@@ -76,7 +76,7 @@ function init(){
 		            paddleQuality,
 		            paddleQuality,
 		            paddleQuality),
-		            paddle1Material
+		            paddle2Material
 	        );
 		
 		sphere = new THREE.Mesh( geometry, material_ball );
