@@ -122,6 +122,8 @@ function takeALeap() {
 				zPos = pointable.tipPosition[2];
 				
 				sendData(xPos,yPos,zPos);
+				
+				console.log("x: " + xPos + " y: " + yPos + " z: " + zPos);
 	
 			  }
 	
