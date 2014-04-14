@@ -76,10 +76,6 @@ function init(){
 		            paddleQuality),
 		          paddle1Material,
 	        );
-      		
-      		
-      		
-      		
 		
 		sphere = new THREE.Mesh( geometry, material_ball );
 		
@@ -131,6 +127,21 @@ function drawCourt () {
 	camera.position.y = 0;
 	
 	}
+	
+function addPaddles() {
+	
+	// set paddles on each side of the table
+	paddle1.position.x = -courtWidth/2 + paddleWidth;
+        paddle2.position.x = courtWidth/2 - paddleWidth;
+
+        	// lift paddles over playing surface
+        paddle1.position.y = courtBottom + paddleHeight;
+	paddle2.position.y = courtBottom + paddleHeight;
+	
+	paddle1.position.z = zPosCourt - (2 * paddleDepth);
+	paddle2.position.z = zPosCourt - paddleDepth;
+	
+}
 	
 function setSpeed () {
 
