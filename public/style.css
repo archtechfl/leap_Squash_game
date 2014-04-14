@@ -3,6 +3,7 @@ canvas {
 	width:100%;
 	height:100%;
 	z-index:0;
+	top:50px;
 }
 
 body { 
@@ -12,11 +13,11 @@ body {
   #score{
     position: absolute;
     background-color: gray;
-    opacity:0.4;
+    opacity:0.8;
     width: 100%;
-    height: 30px;
+    height: 50px;
     color: white;
-    font-size: 1.3em;
+    font-size: 1.6em;
     text-align: center;
     z-index:1;
 }
