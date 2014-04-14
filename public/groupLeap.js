@@ -106,34 +106,32 @@ function takeALeap() {
 	//console.log("takeALeap");
     	
 	controller.on( 'frame' , function( data ){
-	      
-	      		//Capture data
-	      		console.log("data capture");
-	      		//console.log(data);
-		  
-		  	//console.log("Frame data: " + data);
-		 
-			var hand = data.hands;
-			console.log(hand);
-				
-			//console.log("Number of hands: " + data.hands.length);
-			//console.log("Number of fingers: " + data.fingers.length);
-				
-			//Conver tip position to cube position
-			
-			/*
-			
-			xPos = hand[0];
-			yPos = hand[1];
-			zPos = hand[2];
-			
-			*/
-				
-			//console.log("x: " + xPos + " y: " + yPos + " z: " + zPos);
 
-	
+	      		//console.log("frame");
+	      		//Capture data
+	      		frame = data;
+
+		  	//Cycle through coordinates of finger tip
+		  	if (frame.hands.length > 0){
+
+				var hand = frame.hands[0];
+
+				//console.log("Number of hands: " + frame.hands.length);
+				//console.log("Number of fingers: " + frame.fingers.length);
+
+				//Conver tip position to cube position
+				xPos = hand.palmPosition[0];
+				yPos = hand.palmPosition[1];
+				zPos = hand.palmPosition[2];
+
+				//sendData(xPos,yPos,zPos);
+
+				//console.log("x: " + xPos + " y: " + yPos + " z: " + zPos);
+
+			  }
+
 	    });
-	
+
 	controller.connect();
 
 }
