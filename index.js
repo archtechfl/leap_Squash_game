@@ -13,11 +13,11 @@ var clientID = 0;
 
 var userMap = {};
 
+var speedArrayServer = [];
+
 function setSpeed () {
 
 		//console.log("setSpeed");
-		
-		var speedArrayServer = [];
 
 		xSpeed = Math.random() * 1;
 		zSpeed = 1.1;
