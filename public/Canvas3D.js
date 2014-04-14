@@ -32,6 +32,8 @@ var scene,
 	currentScore = 0;
 
 function init(){
+	
+		console.log("init");
 
 		scene = new THREE.Scene();
 	 	camera = new THREE.PerspectiveCamera( 75, window.innerWidth / window.innerHeight, 0.1, 1000 );
@@ -93,6 +95,8 @@ function init(){
 	}
 	
 function drawCourt () {
+	
+	console.log("drawCourt");
 
 	courtWidth = 65;
 	courtDepth = 150;
@@ -130,6 +134,11 @@ function drawCourt () {
 	
 function addPaddles() {
 	
+	console.log("addPaddles");
+	
+	scene.add(paddle1);
+	scene.add(paddle2);
+	
 	// set paddles on each side of the table
 	paddle1.position.x = -courtWidth/2 + paddleWidth;
         paddle2.position.x = courtWidth/2 - paddleWidth;
@@ -141,11 +150,11 @@ function addPaddles() {
 	paddle1.position.z = zPosCourt - (2 * paddleDepth);
 	paddle2.position.z = zPosCourt - paddleDepth;
 	
-	scene.add(paddle1);
-	scene.add(paddle2);
 }
 	
 function setSpeed () {
+	
+		console.log("setSpeed");
 
 		xSpeed = Math.random() * 1;
 		zSpeed = 1.3;
