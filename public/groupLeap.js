@@ -74,7 +74,7 @@ window.onload = function() {
 	socket.on('sendOutData', function (data) 
     	{
     	
-    		console.log("Data: " + data.id + ' ' + data.coord[0]);
+    		//console.log("Data: " + data.id + ' ' + data.coord[0]);
 
     	});
 			
@@ -114,7 +114,7 @@ function takeALeap() {
 		  	//Cycle through coordinates of finger tip
 		  	for(var index = 0; index < frame.pointables.length; index++){
 		  		
-		  		frame();
+		  		console.log(frame);
 		 
 				var pointable = frame.pointables[index];
 				
