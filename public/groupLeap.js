@@ -46,8 +46,6 @@ window.onload = function() {
 		console.log("my session id: " + myUserID);
     		socket.emit('userConnected', { sessionID: myUserID });
     		
-    		
-    		
     	});
 		
 	function sendData() {
@@ -65,7 +63,13 @@ window.onload = function() {
 		//If user count drops below 2, do not transmit until someone joins again
 		if (theUserCount > 1){
 			socket.emit('leapData', { id: myUserID, coord: coordinates });
-		}
+			
+			init();
+			drawCourt();
+			addPaddles();
+			setSpeed();
+			render();
+		}//end of user count > 1
 	}
 	
 	socket.on('userCountUpdate', function (data) 
