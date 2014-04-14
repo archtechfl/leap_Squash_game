@@ -33,7 +33,8 @@ window.onload = function() {
 	score1 = 0,
 	score2 = 0,
 	maxScore = 21,
-	currentScore = 0,
+	currentScore1 = 0,
+	currentScore2 = 0,
 	xPos = 0,
 	yPos = 0,
 	zPos = 0,
@@ -74,7 +75,7 @@ window.onload = function() {
 	socket.on('sendOutData', function (data) 
     	{
     	
-    		//console.log("Data: " + data.id + ' ' + data.coord[0]);
+    		console.log("Data: " + data.id + ' ' + data.coord[0]);
 
     	});
 			
@@ -113,8 +114,6 @@ function takeALeap() {
 		  
 		  	//Cycle through coordinates of finger tip
 		  	for(var index = 0; index < frame.pointables.length; index++){
-		  		
-		  		console.log("Frame data: " + frame);
 		 
 				var pointable = frame.pointables[index];
 				
@@ -310,13 +309,58 @@ function movement()
 				{
 					zSpeed *= -1;
 				} 
+			//start AR
+			  if (ball.children[0].position.x <= paddle1.position.x + paddleWidth
+			  &&  ball.children[0].position.x >= paddle1.position.x)
+			  {
+			    // and if ball is aligned with paddle1 on y plane
+			    if (ball.children[0].position.y <= paddle1.position.y + paddleHeight/2
+			    &&  ball.children[0].position.y >= paddle1.position.y - paddleHeight/2)
+			    {
+			      // and if ball is travelling towards player 
+			      if (xSpeed < 0)
+			      {
+			        currentScore1++;
+			        matchScoreCheck();
+			        // stretch the paddle to indicate a hit
+			        paddle1.color = #27A60E;
+			        // switch direction of ball travel to create bounce
+			        xSpeed = -xSpeed;
+			        // we impact ball angle when hitting it
+			        // this is not realistic physics, just spices up the gameplay
+			        // allows you to 'slice' the ball to beat the opponent
+			        ySpeed -= paddle1DirY * 0.7;
+			      }
+			    }
+			  }//paddle1 1 end
+}//end of movement
 
-	}//end of movement
+function matchScoreCheck() {
+  if (currentScore1 >= maxScore)
+  {
+   // stop the ball
+    xSpeed = 0;
+    zSpeed = 0;
+    ySpeed = 0;
+    document.getElementById("gameTitle").innerHTML = "Player 1 wins!";
+  }
+  // else if opponent has 7 points
+  else if (currentScore2 >=maxScore)
+  {
+    // stop the ball
+    xSpeed = 0;
+    zSpeed = 0;
+    ySpeed = 0;
+
+    document.getElementById("gameTitle").innerHTML = "Player 2 wins!";
+  }
+}
+//end AR
 	
 function movePaddle() {
 	
 	paddle1.position.x = xPos * 0.1;
-	paddle1.position.y = yPos * 0.05;
+	paddle1.position.y = (yPos * 0.05) - 10;
 	paddle1.position.z = zPos * 0.01;
 	
 }//end move paddle
