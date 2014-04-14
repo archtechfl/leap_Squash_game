@@ -141,6 +141,8 @@ function addPaddles() {
 	paddle1.position.z = zPosCourt - (2 * paddleDepth);
 	paddle2.position.z = zPosCourt - paddleDepth;
 	
+	scene.add(paddle1);
+	scene.add(paddle2);
 }
 	
 function setSpeed () {
