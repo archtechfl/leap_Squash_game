@@ -103,5 +103,179 @@ window.onload = function() {
 			}
     		
     	});
+    	
+function init(){
+
+		console.log("init");
+
+		scene = new THREE.Scene();
+	 	camera = new THREE.PerspectiveCamera( 75, window.innerWidth / window.innerHeight, 0.1, 1000 );
+
+	 	renderer = new THREE.WebGLRenderer();
+		renderer.setSize( window.innerWidth, window.innerHeight );
+		document.body.appendChild(renderer.domElement);
+
+		geometry = new THREE.SphereGeometry( 2, 32, 32 );
+
+		material = new THREE.MeshBasicMaterial( { color: 0xBABABA, wireframe: true} );
+		material_ball = new THREE.MeshBasicMaterial( { color: 0xCC0000, wireframe: false} );
+
+		// create the paddle1's material
+		var paddle1Material = new THREE.MeshBasicMaterial({color: 0x1B32C0, wireframe: false});
+  		// create the paddle2's material
+		var paddle2Material = new THREE.MeshBasicMaterial({color: 0x521B6B, wireframe: false});
+
+		paddleWidth = 8;
+	 	paddleHeight = 5;
+      		paddleDepth = 2;
+      		paddleQuality = 1;
+      		
+      		paddle1 = new THREE.Mesh(
+		        new THREE.CubeGeometry(
+		            paddleWidth,
+		            paddleHeight,
+		            paddleDepth,
+		            paddleQuality,
+		            paddleQuality,
+		            paddleQuality),
+		            paddle1Material
+	        );
+
+	        paddle2 = new THREE.Mesh(
+		        new THREE.CubeGeometry(
+		            paddleWidth,
+		            paddleHeight,
+		            paddleDepth,
+		            paddleQuality,
+		            paddleQuality,
+		            paddleQuality),
+		            paddle2Material
+	        );
+
+		sphere = new THREE.Mesh( geometry, material_ball );
+
+		sphere.position.z = -5;
+		sphere.position.y = 0;
+		sphere.position.x = 0;
+
+		ball = new THREE.Object3D();
+		court = new THREE.Object3D();
+
+		ball.add( sphere );
+
+		scene.add(ball);
+
+		/* Leap Initialization */
+    
+    		//new leap motion controller
+    		controller = new Leap.Controller({ enableGestures: true });
+
+	}//end of init
+
+function drawCourt () {
+
+	console.log("drawCourt");
+
+	courtWidth = 60;
+	courtDepth = 150;
+	zPosCourt = 0;
+	courtBottom = -15;
+	yPosCourt = courtBottom;
+	var courtHeight = 30;
+	courtTop = yPosCourt + courtHeight;
+
+	for (i=0; i <= 1; i++){
+		console.log("Create top and bottom");
+		var rectShape = new THREE.Shape();
+		rectShape.moveTo( 0,0 );
+		rectShape.lineTo( 0, courtDepth );
+		rectShape.lineTo( courtWidth, courtDepth );
+		rectShape.lineTo( courtWidth, 0 );
+		rectShape.lineTo( 0, 0 );
+
+		var rectGeom = new THREE.ShapeGeometry( rectShape );
+		var rectMesh = new THREE.Mesh( rectGeom, material ) ;	
+
+		rectMesh.position.set( -(courtWidth/2), yPosCourt, zPosCourt );
+		rectMesh.rotation.set( ((2 * Math.PI) * -0.25), 0, 0);
+
+		court.add( rectMesh );
+		yPosCourt += courtHeight;
+	}
+
+	scene.add( court );
+
+	camera.position.z = 20;
+	camera.position.y = 0;
+
+	}//end of draw court
+
+function addPaddles() {
+
+	console.log("addPaddles");
+
+	scene.add(paddle1);
+	scene.add(paddle2);
+
+	// set paddles on each side of the table
+	paddle1.position.x = -courtWidth/2 + paddleWidth;
+        paddle2.position.x = courtWidth/2 - paddleWidth;
+
+       	// lift paddles over playing surface
+        paddle1.position.y = courtBottom + paddleHeight;
+	paddle2.position.y = courtBottom + paddleHeight;
+
+	paddle1.position.z = zPosCourt - (2 * paddleDepth);
+	paddle2.position.z = zPosCourt - paddleDepth;
+
+}//end of add paddles
+
+function setSpeed () {
+
+		console.log("setSpeed");
+
+		xSpeed = Math.random() * 1;
+		zSpeed = 1.3;
+		ySpeed = Math.random() * 1;
+
+		console.log("x speed: " + xSpeed + " y speed: " + ySpeed  + " z speed: " + zSpeed);
+
+	}//end of set speed
+
+function render() 
+
+		{
+
+			requestAnimationFrame(render);
+
+			movement();
+
+			renderer.render(scene, camera);
+
+		}//end of render
+
+function movement() 
+	{
+
+			ball.children[0].position.x += xSpeed;
+			ball.children[0].position.y += ySpeed;
+			ball.children[0].position.z += zSpeed;
+
+			if (ball.children[0].position.x  >= (courtWidth/2) || ball.children[0].position.x  <= -(courtWidth/2))
+				{
+					xSpeed *= -1;
+				} 
+
+			if (ball.children[0].position.y  >= courtTop || ball.children[0].position.y <= courtBottom)
+				{
+					ySpeed *= -1;
+				} 		
+
+			if (ball.children[0].position.z  <= (-1 * courtDepth) || ball.children[0].position.z  >= zPosCourt)
+				{
+					zSpeed *= -1;
+				} 
+
+	}//end of movement
 
 }
