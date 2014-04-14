@@ -208,8 +208,8 @@ function drawCourt () {
 
 	//console.log("drawCourt");
 
-	courtWidth = 55;
-	courtDepth = 150;
+	courtWidth = 50;
+	courtDepth = courtWidth * 1.7;
 	zPosCourt = 0;
 	courtBottom = -12;
 	yPosCourt = courtBottom;
