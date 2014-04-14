@@ -281,6 +281,7 @@ function render()
 			requestAnimationFrame(render);
 
 			movement();
+			movePaddle();
 
 			renderer.render(scene, camera);
 
@@ -309,5 +310,13 @@ function movement()
 				} 
 
 	}//end of movement
+	
+function movePaddle() {
+	
+	paddle1.position.x = xPos * 0.1;
+	paddle1.position.y = (yPos * 0.05) - 10;
+	paddle1.position.z = zPos * 0.01;
+	
+}//end move paddle
 
 }
