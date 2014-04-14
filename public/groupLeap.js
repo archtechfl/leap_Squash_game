@@ -112,25 +112,24 @@ function takeALeap() {
 	      		frame = data;
 		  
 		  	//Cycle through coordinates of finger tip
-		  	for(var index = 0; index < frame.pointables.length; index++){
+		  	frame.pointables.length; index++){
 		  		
-		  		console.log("Frame data: " + frame);
+		  	//console.log("Frame data: " + frame);
 		 
-				var pointable = frame.pointables[index];
+			var hand = frame.hands[0].palmPosition;
 				
-				//console.log("Number of hands: " + frame.hands.length);
-				//console.log("Number of fingers: " + frame.fingers.length);
+			//console.log("Number of hands: " + frame.hands.length);
+			//console.log("Number of fingers: " + frame.fingers.length);
 				
-				//Conver tip position to cube position
-				xPos = pointable.tipPosition[0];
-				yPos = pointable.tipPosition[1];
-				zPos = pointable.tipPosition[2];
+			//Conver tip position to cube position
+			xPos = hand[0];
+			yPos = hand[1];
+			zPos = hand[2];
 				
-				//sendData(xPos,yPos,zPos);
+			//sendData(xPos,yPos,zPos);
 				
-				//console.log("x: " + xPos + " y: " + yPos + " z: " + zPos);
-	
-			  }
+			//console.log("x: " + xPos + " y: " + yPos + " z: " + zPos);
+
 	
 	    });
 	
