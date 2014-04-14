@@ -49,7 +49,7 @@ window.onload = function() {
     	});
 		
 	function sendData(xPos,yPos,zPos) {
-	
+		console.log("sending data function");
 		var coordinates = [];
 		
 		coordinates.push(xPos);
@@ -89,7 +89,7 @@ window.onload = function() {
 			//People only start transmitting their info to the server once two players have joined
 			if (userCount > 0){
 				//setInterval(sendData, 1000);
-				
+				console.log("Initializing all functions");
 				init();
 				takeALeap();
 				drawCourt();
@@ -102,9 +102,12 @@ window.onload = function() {
     	});
     	
 function takeALeap() {
+	
+	console.log("takeALeap");
     	
 	controller.on( 'frame' , function( data ){
 	      
+	      		console.log("frame");
 	      		//Capture data
 	      		frame = data;
 		  
