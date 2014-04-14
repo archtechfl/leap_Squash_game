@@ -91,6 +91,7 @@ window.onload = function() {
 				//setInterval(sendData, 1000);
 				
 				init();
+				takeALeap();
 				drawCourt();
 				addPaddles();
 				setSpeed();
@@ -100,31 +101,35 @@ window.onload = function() {
     		
     	});
     	
-controller.on( 'frame' , function( data ){
-      
-      		//Capture data
-      		frame = data;
-	  
-	  	//Cycle through coordinates of finger tip
-	  	for(var index = 0; index < frame.pointables.length; index++){
-	 
-			var pointable = frame.pointables[index];
-			
-			console.log("Number of hands: " + frame.hands.length);
-			console.log("Number of fingers: " + frame.fingers.length);
-			
-			//Conver tip position to cube position
-			xPos = pointable.tipPosition[0];
-			yPos = pointable.tipPosition[1];
-			zPos = pointable.tipPosition[2];
-			
-			sendData(xPos,yPos,zPos);
+function takeALeap() {
+    	
+	controller.on( 'frame' , function( data ){
+	      
+	      		//Capture data
+	      		frame = data;
+		  
+		  	//Cycle through coordinates of finger tip
+		  	for(var index = 0; index < frame.pointables.length; index++){
+		 
+				var pointable = frame.pointables[index];
+				
+				console.log("Number of hands: " + frame.hands.length);
+				console.log("Number of fingers: " + frame.fingers.length);
+				
+				//Conver tip position to cube position
+				xPos = pointable.tipPosition[0];
+				yPos = pointable.tipPosition[1];
+				zPos = pointable.tipPosition[2];
+				
+				sendData(xPos,yPos,zPos);
+	
+			  }
+	
+	    });
+	
+	controller.connect();
 
-		  }
-
-    });
-
-controller.connect();
+}
     	
 function init(){
 
