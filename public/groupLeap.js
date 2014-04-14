@@ -64,11 +64,6 @@ window.onload = function() {
 		if (theUserCount > 1){
 			socket.emit('leapData', { id: myUserID, coord: coordinates });
 			
-			init();
-			drawCourt();
-			addPaddles();
-			setSpeed();
-			render();
 		}//end of user count > 1
 	}
 	
@@ -98,6 +93,13 @@ window.onload = function() {
 			//People only start transmitting their info to the server once two players have joined
 			if (userCount > 0){
 				setInterval(sendData, 1000);
+				
+				init();
+				drawCourt();
+				addPaddles();
+				setSpeed();
+				render();
+				
 			}
     		
     	});
