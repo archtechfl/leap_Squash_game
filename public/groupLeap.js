@@ -43,13 +43,13 @@ window.onload = function() {
     socket.on('connect', function () 
     	{
     		myUserID = this.socket.sessionid;
-		console.log("my session id: " + myUserID);
+		//console.log("my session id: " + myUserID);
     		socket.emit('userConnected', { sessionID: myUserID });
     		
     	});
 		
 	function sendData(xPos,yPos,zPos) {
-		console.log("sending data function");
+		//console.log("sending data function");
 		var coordinates = [];
 		
 		coordinates.push(xPos);
@@ -66,7 +66,7 @@ window.onload = function() {
 	socket.on('userCountUpdate', function (data) 
     	{
     	
-    		console.log("new user count: " + data.count);
+    		//console.log("new user count: " + data.count);
 			theUserCount = data.count;
 
     	});
@@ -81,7 +81,7 @@ window.onload = function() {
     socket.on('loginResponse', function (data) 
     	{
     	
-    		console.log("login response: " + data.response);
+    	//	console.log("login response: " + data.response);
 			myClient = data.myClientID;
 			
 			var userCount = data.userCount;
@@ -89,7 +89,7 @@ window.onload = function() {
 			//People only start transmitting their info to the server once two players have joined
 			if (userCount > 0){
 				//setInterval(sendData, 1000);
-				console.log("Initializing all functions");
+			//	console.log("Initializing all functions");
 				init();
 				takeALeap();
 				drawCourt();
@@ -103,11 +103,11 @@ window.onload = function() {
     	
 function takeALeap() {
 	
-	console.log("takeALeap");
+	//console.log("takeALeap");
     	
 	controller.on( 'frame' , function( data ){
 	      
-	      		console.log("frame");
+	      		//console.log("frame");
 	      		//Capture data
 	      		frame = data;
 		  
@@ -126,7 +126,7 @@ function takeALeap() {
 				
 				sendData(xPos,yPos,zPos);
 				
-				console.log("x: " + xPos + " y: " + yPos + " z: " + zPos);
+				//console.log("x: " + xPos + " y: " + yPos + " z: " + zPos);
 	
 			  }
 	
@@ -138,7 +138,7 @@ function takeALeap() {
     	
 function init(){
 
-		console.log("init");
+		//console.log("init");
 
 		scene = new THREE.Scene();
 	 	camera = new THREE.PerspectiveCamera( 75, window.innerWidth / window.innerHeight, 0.1, 1000 );
@@ -206,7 +206,7 @@ function init(){
 
 function drawCourt () {
 
-	console.log("drawCourt");
+	//console.log("drawCourt");
 
 	courtWidth = 60;
 	courtDepth = 150;
@@ -244,7 +244,7 @@ function drawCourt () {
 
 function addPaddles() {
 
-	console.log("addPaddles");
+	//console.log("addPaddles");
 
 	scene.add(paddle1);
 	scene.add(paddle2);
@@ -264,7 +264,7 @@ function addPaddles() {
 
 function setSpeed () {
 
-		console.log("setSpeed");
+		//console.log("setSpeed");
 
 		xSpeed = Math.random() * 1;
 		zSpeed = 1.3;
