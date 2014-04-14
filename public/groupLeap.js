@@ -1,14 +1,53 @@
 window.onload = function() {
-    var socket = io.connect('http://localhost:3700');
-    var userID = 0;
+    	var socket = io.connect('http://localhost:3700');
+    	var userID = 0;
 	var myClient = 0;
 	var theUserCount = 0;
+	
+	var scene, 
+	camera, 
+	renderer, 
+	geometry, 
+	material, 
+	sphere, 
+	ball, 
+	court, 
+	xSpeed, 
+	zSpeed, 
+	ySpeed, 
+	courtWidth, 
+	courtDepth, 
+	zPosCourt, 
+	yPosCourt, 
+	courtTop,
+	/*Paddle variables*/
+	paddleWidth,
+	paddleHeight,
+	paddleDepth,
+	paddleQuality,
+	paddle1DirY = 0,
+	paddle2DirY = 0,
+	paddleSpeed = 3,
+	paddle1,
+	paddle2,
+	score1 = 0,
+	score2 = 0,
+	maxScore = 21,
+	currentScore = 0,
+	xPos = 0,
+	yPos = 0,
+	zPos = 0,
+	frame,
+	controller;
 	
     socket.on('connect', function () 
     	{
     		myUserID = this.socket.sessionid;
-			console.log("my session id: " + myUserID);
+		console.log("my session id: " + myUserID);
     		socket.emit('userConnected', { sessionID: myUserID });
+    		
+    		
+    		
     	});
 		
 	function sendData() {
