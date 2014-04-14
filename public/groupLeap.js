@@ -48,17 +48,13 @@ window.onload = function() {
     		
     	});
 		
-	function sendData() {
+	function sendData(xPos,yPos,zPos) {
 	
 		var coordinates = [];
-	
-		var xCoord = 10;
-		var yCoord = 10;
-		var zCoord = 10;
 		
-		coordinates.push(xCoord);
-		coordinates.push(yCoord);
-		coordinates.push(zCoord);
+		coordinates.push(xPos);
+		coordinates.push(yPos);
+		coordinates.push(zPos);
 	
 		//If user count drops below 2, do not transmit until someone joins again
 		if (theUserCount > 1){
@@ -92,7 +88,7 @@ window.onload = function() {
 			
 			//People only start transmitting their info to the server once two players have joined
 			if (userCount > 0){
-				setInterval(sendData, 1000);
+				//setInterval(sendData, 1000);
 				
 				init();
 				drawCourt();
@@ -103,6 +99,32 @@ window.onload = function() {
 			}
     		
     	});
+    	
+controller.on( 'frame' , function( data ){
+      
+      		//Capture data
+      		frame = data;
+	  
+	  	//Cycle through coordinates of finger tip
+	  	for(var index = 0; index < frame.pointables.length; index++){
+	 
+			var pointable = frame.pointables[index];
+			
+			console.log("Number of hands: " + frame.hands.length);
+			console.log("Number of fingers: " + frame.fingers.length);
+			
+			//Conver tip position to cube position
+			xPos = pointable.tipPosition[0];
+			yPos = pointable.tipPosition[1];
+			zPos = pointable.tipPosition[2];
+			
+			sendData(xPos,yPos,zPos);
+
+		  }
+
+    });
+
+controller.connect();
     	
 function init(){
 
