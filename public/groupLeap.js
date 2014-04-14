@@ -108,15 +108,14 @@ function takeALeap() {
 	controller.on( 'frame' , function( data ){
 	      
 	      		//Capture data
-	      		frame = data;
-	      		console.log(frame);
+	      		console.log(data);
 		  
-		  	//console.log("Frame data: " + frame);
+		  	//console.log("Frame data: " + data);
 		 
-			//var hand = frame.hands[0].palmPosition;
+			//var hand = data.hands[0].palmPosition;
 				
-			//console.log("Number of hands: " + frame.hands.length);
-			//console.log("Number of fingers: " + frame.fingers.length);
+			//console.log("Number of hands: " + data.hands.length);
+			//console.log("Number of fingers: " + data.fingers.length);
 				
 			//Conver tip position to cube position
 			
