@@ -43,7 +43,7 @@ window.onload = function() {
     socket.on('connect', function () 
     	{
     		myUserID = this.socket.sessionid;
-		//console.log("my session id: " + myUserID);
+		console.log("my session id: " + myUserID);
     		socket.emit('userConnected', { sessionID: myUserID });
     		
     	});
