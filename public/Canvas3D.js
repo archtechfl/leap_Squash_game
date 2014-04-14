@@ -202,6 +202,7 @@ function movement()
 	
 	init();
 	drawCourt();
+	addPaddles();
 	setSpeed();
 	render();
 	
