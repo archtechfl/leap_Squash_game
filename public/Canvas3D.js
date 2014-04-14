@@ -46,9 +46,9 @@ function init(){
 		material_ball = new THREE.MeshBasicMaterial( { color: 0xCC0000, wireframe: false} );
 		
 		// create the paddle1's material
-		var paddle1Material = new THREE.MeshLambertMaterial({color: 0x1B32C0;});
+		var paddle1Material = new THREE.MeshLambertMaterial({color: 0x1B32C0, wireframe: false});
   		// create the paddle2's material
-		var paddle2Material = new THREE.MeshLambertMaterial({color: 0xFF4045;});
+		var paddle2Material = new THREE.MeshLambertMaterial({color: 0xFF4045, wireframe: false});
 		
 		paddleWidth = 10;
 	 	paddleHeight = 30;
@@ -63,7 +63,7 @@ function init(){
 		            paddleQuality,
 		            paddleQuality,
 		            paddleQuality),
-		            paddle1Material,
+		            paddle1Material
 	        );
 	
 	        paddle2 = new THREE.Mesh(
@@ -74,7 +74,7 @@ function init(){
 		            paddleQuality,
 		            paddleQuality,
 		            paddleQuality),
-		          paddle1Material,
+		            paddle1Material
 	        );
 		
 		sphere = new THREE.Mesh( geometry, material_ball );
