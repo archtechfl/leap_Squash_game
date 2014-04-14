@@ -107,9 +107,9 @@ function takeALeap() {
     	
 	controller.on( 'frame' , function( data ){
 	      
-	      		console.log(frame);
 	      		//Capture data
 	      		frame = data;
+	      		console.log(frame);
 		  
 		  	//console.log("Frame data: " + frame);
 		 
