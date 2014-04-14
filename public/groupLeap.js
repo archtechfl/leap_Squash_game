@@ -109,11 +109,12 @@ function takeALeap() {
 	      
 	      		//Capture data
 	      		console.log("data capture");
-	      		console.log(data);
+	      		//console.log(data);
 		  
 		  	//console.log("Frame data: " + data);
 		 
-			//var hand = data.hands[0].palmPosition;
+			var hand = data.hands;
+			console.log(hand);
 				
 			//console.log("Number of hands: " + data.hands.length);
 			//console.log("Number of fingers: " + data.fingers.length);
