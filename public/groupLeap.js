@@ -196,7 +196,7 @@ function init(){
 
 		sphere = new THREE.Mesh( geometry, material_ball );
 
-		sphere.position.z = -5;
+		sphere.position.z = -10;
 		sphere.position.y = 0;
 		sphere.position.x = 0;
 
