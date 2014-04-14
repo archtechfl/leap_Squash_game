@@ -54,7 +54,7 @@ function init(){
 		
 		paddleWidth = 8;
 	 	paddleHeight = 5;
-      		paddleDepth = 3;
+      		paddleDepth = 2;
       		paddleQuality = 1;
       		
       		paddle1 = new THREE.Mesh(
@@ -98,7 +98,7 @@ function drawCourt () {
 	
 	console.log("drawCourt");
 
-	courtWidth = 65;
+	courtWidth = 60;
 	courtDepth = 150;
 	zPosCourt = 0;
 	courtBottom = -15;
@@ -122,7 +122,7 @@ function drawCourt () {
 		rectMesh.rotation.set( ((2 * Math.PI) * -0.25), 0, 0);
 		
 		court.add( rectMesh );
-		yPosCourt += 20;
+		yPosCourt += courtHeight;
 	}
 
 	scene.add( court );
@@ -143,7 +143,7 @@ function addPaddles() {
 	paddle1.position.x = -courtWidth/2 + paddleWidth;
         paddle2.position.x = courtWidth/2 - paddleWidth;
 
-        	// lift paddles over playing surface
+       	// lift paddles over playing surface
         paddle1.position.y = courtBottom + paddleHeight;
 	paddle2.position.y = courtBottom + paddleHeight;
 	
