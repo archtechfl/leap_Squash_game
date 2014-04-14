@@ -48,7 +48,7 @@ window.onload = function() {
     		
     	});
 		
-	function sendData(xPos,yPos,zPos) {
+	function sendData() {
 		//console.log("sending data function");
 		var coordinates = [];
 		
@@ -88,8 +88,8 @@ window.onload = function() {
 			
 			//People only start transmitting their info to the server once two players have joined
 			if (userCount > 0){
-				//setInterval(sendData, 1000);
-			//	console.log("Initializing all functions");
+				setInterval(sendData, (1000/15));
+				//console.log("Initializing all functions");
 				init();
 				takeALeap();
 				drawCourt();
@@ -124,7 +124,7 @@ function takeALeap() {
 				yPos = pointable.tipPosition[1];
 				zPos = pointable.tipPosition[2];
 				
-				sendData(xPos,yPos,zPos);
+				//sendData(xPos,yPos,zPos);
 				
 				//console.log("x: " + xPos + " y: " + yPos + " z: " + zPos);
 	
