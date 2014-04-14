@@ -318,7 +318,7 @@ function movement()
 			    &&  ball.children[0].position.y >= paddle1.position.y - paddleHeight/2)
 			    {
 			      // and if ball is travelling towards player 
-			      if (xSpeed < 0)
+			      if (zSpeed < 0)
 			      {
 			        currentScore1++;
 			        matchScoreCheck();
