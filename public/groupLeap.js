@@ -119,9 +119,14 @@ function takeALeap() {
 			//console.log("Number of fingers: " + frame.fingers.length);
 				
 			//Conver tip position to cube position
+			
+			/*
+			
 			xPos = hand[0];
 			yPos = hand[1];
 			zPos = hand[2];
+			
+			*/
 				
 			console.log("x: " + xPos + " y: " + yPos + " z: " + zPos);
 
