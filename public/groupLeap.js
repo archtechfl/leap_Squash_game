@@ -38,7 +38,11 @@ window.onload = function() {
 	yPos = 0,
 	zPos = 0,
 	frame,
-	controller;
+	controller,
+	speedArray,
+	xSpeed,
+	ySpeed,
+	zSpeed;
 	
     socket.on('connect', function () 
     	{
@@ -86,6 +90,12 @@ window.onload = function() {
 			
 			var userCount = data.userCount;
 			
+			speedArray = data.speedArray;
+			
+			xSpeed = speedArray[0];
+			ySpeed = speedArray[1];
+			zSpeed = speedArray[2];
+			
 			//People only start transmitting their info to the server once two players have joined
 			if (userCount > 0){
 				setInterval(sendData, (1000/15));
@@ -94,7 +104,7 @@ window.onload = function() {
 				takeALeap();
 				drawCourt();
 				addPaddles();
-				setSpeed();
+				//setSpeed();
 				render();
 				
 			}
