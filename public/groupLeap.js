@@ -111,9 +111,6 @@ function takeALeap() {
 	      		//Capture data
 	      		frame = data;
 		  
-		  	//Cycle through coordinates of finger tip
-		  	frame.pointables.length; index++){
-		  		
 		  	//console.log("Frame data: " + frame);
 		 
 			var hand = frame.hands[0].palmPosition;
