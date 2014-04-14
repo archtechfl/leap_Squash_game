@@ -15,7 +15,21 @@ var scene,
 	courtDepth, 
 	zPosCourt, 
 	yPosCourt, 
-	courtTop;
+	courtTop,
+	/*Paddle variables*/
+	paddleWidth,
+	paddleHeight,
+	paddleDepth,
+	paddleQuality,
+	paddle1DirY = 0,
+	paddle2DirY = 0,
+	paddleSpeed = 3,
+	paddle1,
+	paddle2,
+	score1 = 0,
+	score2 = 0,
+	maxScore = 21,
+	currentScore = 0;
 
 function init(){
 
@@ -30,6 +44,42 @@ function init(){
 		
 		material = new THREE.MeshBasicMaterial( { color: 0xBABABA, wireframe: true} );
 		material_ball = new THREE.MeshBasicMaterial( { color: 0xCC0000, wireframe: false} );
+		
+		// create the paddle1's material
+		var paddle1Material = new THREE.MeshLambertMaterial({color: 0x1B32C0;});
+  		// create the paddle2's material
+		var paddle2Material = new THREE.MeshLambertMaterial({color: 0xFF4045;});
+		
+		paddleWidth = 10;
+	 	paddleHeight = 30;
+      		paddleDepth = 10;
+      		paddleQuality = 1;
+      		
+      		paddle1 = new THREE.Mesh(
+		        new THREE.CubeGeometry(
+		            paddleWidth,
+		            paddleHeight,
+		            paddleDepth,
+		            paddleQuality,
+		            paddleQuality,
+		            paddleQuality),
+		            paddle1Material,
+	        );
+	
+	        paddle2 = new THREE.Mesh(
+		        new THREE.CubeGeometry(
+		            paddleWidth,
+		            paddleHeight,
+		            paddleDepth,
+		            paddleQuality,
+		            paddleQuality,
+		            paddleQuality),
+		          paddle1Material,
+	        );
+      		
+      		
+      		
+      		
 		
 		sphere = new THREE.Mesh( geometry, material_ball );
 		
