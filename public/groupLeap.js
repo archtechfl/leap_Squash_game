@@ -306,8 +306,52 @@ function movement()
 				{
 					zSpeed *= -1;
 				} 
+			//start AR
+			  if (ball.children[0].position.x <= paddle1.position.x + paddleWidth
+			  &&  ball.children[0].position.x >= paddle1.position.x)
+			  {
+			    // and if ball is aligned with paddle1 on y plane
+			    if (ball.children[0].position.y <= paddle1.position.y + paddleHeight/2
+			    &&  ball.children[0].position.y >= paddle1.position.y - paddleHeight/2)
+			    {
+			      // and if ball is travelling towards player 
+			      if (xSpeed < 0)
+			      {
+			        currentScore1++;
+			        matchScoreCheck();
+			        // stretch the paddle to indicate 
+			        // switch direction of ball travel to create bounce
+			        zSpeed *= -1;
+			        // we impact ball angle when hitting it
+			        // this is not realistic physics, just spices up the gameplay
+			        // allows you to 'slice' the ball to beat the opponent
+			
+			      }
+			    }
+			  }//paddle1 1 end
+}//end of movement
 
-	}//end of movement
+function matchScoreCheck() {
+  if (currentScore1 >= maxScore)
+  {
+   // stop the ball
+    xSpeed = 0;
+    zSpeed = 0;
+    ySpeed = 0;
+    document.getElementById("gameTitle").innerHTML = "Player 1 wins!";
+  }
+  // else if opponent has 7 points
+  else if (currentScore2 >=maxScore)
+  {
+    // stop the ball
+    xSpeed = 0;
+    zSpeed = 0;
+    ySpeed = 0;
+
+    document.getElementById("gameTitle").innerHTML = "Player 2 wins!";
+  }
+}
+//end AR
 	
 function movePaddle() {
 	
