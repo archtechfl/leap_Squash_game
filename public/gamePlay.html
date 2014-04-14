@@ -1,0 +1,58 @@
+<!doctype html>
+<html>
+<head>
+  <!-- BASIC HTML tags -->
+  <meta charset="utf-8">
+  <title>Multi-player 3D Ping-Pong with Leap Motion</title>
+  <!-- CSS -->
+  <link rel="stylesheet" type="text/css" href="style.css" />
+  <!-- JS-->
+  <script src="three.min.js"></script>
+  <script src="groupLeap.js"></script>
+  <style>
+  body { 
+    margin:0px; padding:0px;
+    font-family: Verdana, Geneva, sans-serif;
+  }
+  #score{
+    position: absolute;
+    background-color: gray;
+    opacity:0.4;
+    width: 100%;
+    height: 30px;
+    color: white;
+    font-size: 1.3em;
+    text-align: center;
+  }
+  #gameTitle{
+    float: center; 
+    width: 33%;
+    display:inline;
+  }
+  #player1score {
+    float: left;
+    width: 33%;
+    display:inline;
+    text-align: left;
+    text-align: center;
+  }
+  #player2score{
+    float:right;
+    width: 33%;
+    display:inline;
+    right:0px;
+  }
+  </style>
+</head>
+<body>
+  <div id="score">
+    <div id="player1score">1</div>
+    <div id="player2score">2</div>
+    <div id="gameTitle">Crazy Pong!</div>
+
+  </div>
+
+  <div id="display"></div>
+  
+</body>
+</html>
