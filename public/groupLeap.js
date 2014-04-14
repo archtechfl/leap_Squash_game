@@ -108,6 +108,7 @@ function takeALeap() {
 	controller.on( 'frame' , function( data ){
 	      
 	      		//Capture data
+	      		console.log("data capture");
 	      		console.log(data);
 		  
 		  	//console.log("Frame data: " + data);
@@ -127,7 +128,7 @@ function takeALeap() {
 			
 			*/
 				
-			console.log("x: " + xPos + " y: " + yPos + " z: " + zPos);
+			//console.log("x: " + xPos + " y: " + yPos + " z: " + zPos);
 
 	
 	    });
