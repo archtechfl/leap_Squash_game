@@ -114,7 +114,7 @@ function takeALeap() {
 		  	//Cycle through coordinates of finger tip
 		  	for(var index = 0; index < frame.pointables.length; index++){
 		  		
-		  		console.log(frame);
+		  		console.log("Frame data: " + frame);
 		 
 				var pointable = frame.pointables[index];
 				
