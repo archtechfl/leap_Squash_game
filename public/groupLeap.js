@@ -317,6 +317,8 @@ function movement()
 			    if (ball.children[0].position.y <= paddle1.position.y + paddleHeight/2
 			    &&  ball.children[0].position.y >= paddle1.position.y - paddleHeight/2)
 			    {
+			    	if (ball.children[0].position.z <= paddle1.position.z + paddleDepth/2
+			    &&  ball.children[0].position.z >= paddle1.position.z - paddleDepth/2)
 			      // and if ball is travelling towards player 
 			      if (zSpeed < 0)
 			      {
@@ -325,10 +327,11 @@ function movement()
 			        // stretch the paddle to indicate 
 			        // switch direction of ball travel to create bounce
 			        zSpeed *= -1;
+			        document.getElementById("player1score").innerHTML = currentScore1;
 			        // we impact ball angle when hitting it
 			        // this is not realistic physics, just spices up the gameplay
 			        // allows you to 'slice' the ball to beat the opponent
-			
+			      	}
 			      }
 			    }
 			  }//paddle1 1 end
