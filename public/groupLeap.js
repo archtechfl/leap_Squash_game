@@ -107,13 +107,13 @@ function takeALeap() {
     	
 	controller.on( 'frame' , function( data ){
 	      
-	      		//console.log("frame");
+	      		console.log(frame);
 	      		//Capture data
 	      		frame = data;
 		  
 		  	//console.log("Frame data: " + frame);
 		 
-			var hand = frame.hands[0].palmPosition;
+			//var hand = frame.hands[0].palmPosition;
 				
 			//console.log("Number of hands: " + frame.hands.length);
 			//console.log("Number of fingers: " + frame.fingers.length);
