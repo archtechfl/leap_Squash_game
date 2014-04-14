@@ -211,9 +211,9 @@ function drawCourt () {
 	courtWidth = 60;
 	courtDepth = 150;
 	zPosCourt = 0;
-	courtBottom = -15;
+	courtBottom = -12;
 	yPosCourt = courtBottom;
-	var courtHeight = 30;
+	var courtHeight = 24;
 	courtTop = yPosCourt + courtHeight;
 
 	for (i=0; i <= 1; i++){
