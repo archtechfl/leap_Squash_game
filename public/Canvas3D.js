@@ -52,9 +52,9 @@ function init(){
   		// create the paddle2's material
 		var paddle2Material = new THREE.MeshBasicMaterial({color: 0xFF4045, wireframe: false});
 		
-		paddleWidth = 30;
-	 	paddleHeight = 10;
-      		paddleDepth = 5;
+		paddleWidth = 8;
+	 	paddleHeight = 5;
+      		paddleDepth = 3;
       		paddleQuality = 1;
       		
       		paddle1 = new THREE.Mesh(
