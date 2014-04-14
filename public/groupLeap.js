@@ -134,6 +134,8 @@ function takeALeap() {
 				xPos = hand.palmPosition[0];
 				yPos = hand.palmPosition[1];
 				zPos = hand.palmPosition[2];
+				
+				console.log(zPos);
 
 				//console.log(yPos);
 
@@ -164,12 +166,12 @@ function init(){
 		material_ball = new THREE.MeshBasicMaterial( { color: 0xCC0000, wireframe: false} );
 
 		// create the paddle1's material
-		var paddle1Material = new THREE.MeshBasicMaterial({color: 0x1B32C0, wireframe: false});
+		var paddle1Material = new THREE.MeshBasicMaterial({color: 0x1B32C0, wireframe: true});
   		// create the paddle2's material
-		var paddle2Material = new THREE.MeshBasicMaterial({color: 0x521B6B, wireframe: false});
+		var paddle2Material = new THREE.MeshBasicMaterial({color: 0x521B6B, wireframe: true});
 
-		paddleWidth = 10;
-	 	paddleHeight = 10;
+		paddleWidth = 20;
+	 	paddleHeight = 20;
       		paddleDepth = 1;
       		paddleQuality = 1;
       		
@@ -304,12 +306,11 @@ function movement()
 					ySpeed *= -1;
 				} 		
 
-			if (ball.children[0].position.z  <= (-1 * courtDepth) || ball.children[0].position.z  >= zPosCourt)
+			if (ball.children[0].position.z  <= (-1 * courtDepth) || ball.children[0].position.z  >= (zPosCourt + 20))
 				{
 					zSpeed *= -1;
 				} 
-			//start collision
-			console.log("hit");
+			//start AR
 			  if (ball.children[0].position.x <= paddle1.position.x + paddleWidth
 			  &&  ball.children[0].position.x >= paddle1.position.x)
 			  {
