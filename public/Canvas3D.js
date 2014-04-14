@@ -29,7 +29,12 @@ var scene,
 	score1 = 0,
 	score2 = 0,
 	maxScore = 21,
-	currentScore = 0;
+	currentScore = 0,
+	xPos = 0,
+	yPos = 0,
+	zPos = 0,
+	frame,
+	controller;
 
 function init(){
 	
@@ -91,6 +96,11 @@ function init(){
 		ball.add( sphere );
 	
 		scene.add(ball);
+		
+		/* Leap Initialization */
+    
+    		//new leap motion controller
+    		controller = new Leap.Controller({ enableGestures: true });
 		
 	}
 	
