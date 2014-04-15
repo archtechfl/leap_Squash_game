@@ -67,10 +67,10 @@ io.sockets.on('connection', function (socket) {
 				
 				opponentMap[keyTemp[0]] = keyTemp[1];
 				opponentMap[keyTemp[1]] = keyTemp[0];
-				console.log(keyTemp[1]);
-				console.log(opponentMap[keyTemp[0]]);
-				console.log(keyTemp[0]);
-				console.log(opponentMap[keyTemp[1]]);
+				//console.log(keyTemp[1]);
+				//console.log(opponentMap[keyTemp[0]]);
+				//console.log(keyTemp[0]);
+				//console.log(opponentMap[keyTemp[1]]);
 				
 			}
 				
@@ -80,6 +80,7 @@ io.sockets.on('connection', function (socket) {
 		    			io.sockets.emit('loginResponse', {response: "First person joined", map: userMap, myClientID: clientID, userCount: numUsers, speedArray: speedArrayServer, player:playerNames[0]});
 		    		} else if (numUsers > 0){
 		    			io.sockets.socket(lastID).emit('loginResponse', {response: "Second person joined", map: userMap, myClientID: clientID, userCount: numUsers, speedArray: speedArrayServer, player:playerNames[1]});
+						io.sockets.emit('startGame', {response: "Game has begun"});
 					console.log("Maximum number of users reached");
 		    		} else {
 		    			console.log("Nothing to do");
