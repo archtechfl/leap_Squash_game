@@ -43,7 +43,8 @@ window.onload = function() {
 	speedArray,
 	xSpeed,
 	ySpeed,
-	zSpeed;
+	zSpeed,
+	ballRadius;
 	
     socket.on('connect', function () 
     	{
@@ -135,7 +136,7 @@ function takeALeap() {
 				yPos = hand.palmPosition[1];
 				zPos = hand.palmPosition[2];
 				
-				console.log(zPos);
+				//console.log(zPos);
 
 				//console.log(yPos);
 
@@ -160,7 +161,9 @@ function init(){
 		renderer.setSize( window.innerWidth, window.innerHeight );
 		document.body.appendChild(renderer.domElement);
 
-		geometry = new THREE.SphereGeometry( 1.5, 32, 32 );
+		ballRadius = 1.25;
+		
+		geometry = new THREE.SphereGeometry( ballRadius, 32, 32 );
 
 		material = new THREE.MeshBasicMaterial( { color: 0xBABABA, wireframe: true} );
 		material_ball = new THREE.MeshBasicMaterial( { color: 0xCC0000, wireframe: false} );
@@ -170,9 +173,9 @@ function init(){
   		// create the paddle2's material
 		var paddle2Material = new THREE.MeshBasicMaterial({color: 0x521B6B, wireframe: true});
 
-		paddleWidth = 20;
-	 	paddleHeight = 20;
-      		paddleDepth = 1;
+		paddleWidth = 10;
+	 	paddleHeight = 8;
+      		paddleDepth = .25;
       		paddleQuality = 1;
       		
       		paddle1 = new THREE.Mesh(
@@ -318,10 +321,9 @@ function movement()
 			    if (ball.children[0].position.y <= paddle1.position.y + paddleHeight/2
 			    &&  ball.children[0].position.y >= paddle1.position.y - paddleHeight/2)
 			    {
-			    	if (ball.children[0].position.z <= paddle1.position.z + paddleDepth/2
-			    &&  ball.children[0].position.z >= paddle1.position.z - paddleDepth/2){
+			    if (ball.children[0].position.z >= paddle1.position.z - ((paddleDepth/2) - ballRadius)){
 			      // and if ball is travelling towards player 
-			      if (zSpeed < 0)
+			      if (zSpeed > 0)
 			      {
 			        currentScore1++;
 			        matchScoreCheck();
@@ -365,7 +367,8 @@ function movePaddle() {
 	var vAF = 1.7;
 	paddle1.position.x = xPos * 0.3;
 	paddle1.position.y = (yPos * 0.11) + (courtBottom * vAF);
-	paddle1.position.z = zPos * 0.5;
+	paddle1.position.z = (zPos - 80) * 0.2;
+	console.log("paddle z position: " + paddle1.position.z);
 	
 }//end move paddle
 
