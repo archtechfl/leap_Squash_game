@@ -12,8 +12,14 @@ var numUsers = 0;
 var clientID = 0;
 
 var userMap = {};
+var playerMap = {};
 
 var speedArrayServer = [];
+
+var player1;
+var player2;
+
+var playerNames = ["player1","player2"];
 
 function setSpeed () {
 
@@ -35,7 +41,7 @@ setSpeed();
 
 io.sockets.on('connection', function (socket) {
 	
-		console.log("Socket: " + socket);
+		console.log("Socket ID: " + socket.id);
 	
 		var address = socket.handshake.address;
 	    	console.log("New connection from " + address.address + " : " + address.port);
@@ -51,9 +57,9 @@ io.sockets.on('connection', function (socket) {
 			console.log("User map testing: " + userMap[clientID]);
 		
 		    		if (numUsers < 1){
-		    			io.sockets.emit('loginResponse', {response: "First person joined", map: userMap, myClientID: clientID, userCount: numUsers, speedArray: speedArrayServer});
+		    			io.sockets.emit('loginResponse', {response: "First person joined", map: userMap, myClientID: clientID, userCount: numUsers, speedArray: speedArrayServer, player:playerNames[0]});
 		    		} else if (numUsers > 0){
-		    			io.sockets.emit('loginResponse', {response: "Second person joined", map: userMap, myClientID: clientID, userCount: numUsers, speedArray: speedArrayServer});
+		    			io.sockets.emit('loginResponse', {response: "Second person joined", map: userMap, myClientID: clientID, userCount: numUsers, speedArray: speedArrayServer, player:playerNames[1]});
 					console.log("Maximum number of users reached");
 		    		} else {
 		    			console.log("Nothing to do");
