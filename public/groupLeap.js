@@ -326,6 +326,7 @@ function movement()
 			      if (zSpeed > 0)
 			      {
 			        currentScore1++;
+			        PlaySound('bonk.mp3');
 			        matchScoreCheck();
 			        // stretch the paddle to indicate 
 			        // switch direction of ball travel to create bounce
@@ -371,5 +372,11 @@ function movePaddle() {
 	console.log("paddle z position: " + paddle1.position.z);
 	
 }//end move paddle
+
+function PlaySound(path) {
+  var audioElement = document.createElement('audio');
+  audioElement.setAttribute('src', path);
+  audioElement.play();
+}
 
 }
