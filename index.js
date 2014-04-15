@@ -13,63 +13,83 @@ var clientID = 0;
 
 var userMap = {};
 
-io.sockets.on('connection', function (socket) {
+var speedArrayServer = [];
 
-	console.log("Socket: " + socket);
+function setSpeed () {
 
-    var address = socket.handshake.address;
-    console.log("New connection from " + address.address + " : " + address.port);
-    
-    socket.on('userConnected', function (data) {
-    
-		clientID = Math.floor(Math.random() * 1e6);
-		socket.clientID = clientID;
+		//console.log("setSpeed");
+
+		xSpeed = Math.random() * 1;
+		zSpeed = 1.1;
+		ySpeed = Math.random() * 1;
 		
-		//Session ID to client ID mapping
-		userMap[clientID] = data.sessionID;
-		
-		console.log("User map testing: " + userMap[clientID]);
+		speedArrayServer.push(xSpeed);
+		speedArrayServer.push(zSpeed);
+		speedArrayServer.push(ySpeed);
+
+		console.log("x speed: " + xSpeed + " y speed: " + ySpeed  + " z speed: " + zSpeed);
+
+	}//end of set speed
 	
-    	if (numUsers < 1){
-    		io.sockets.emit('loginResponse', {response: "First person joined", map: userMap, myClientID: clientID, userCount: numUsers});
-    	} else if (numUsers > 0){
-    		io.sockets.emit('loginResponse', {response: "Second person joined", map: userMap, myClientID: clientID, userCount: numUsers});
-			console.log("Maximum number of users reached");
-    	} else {
-    		console.log("Nothing to do");
-    	}
+setSpeed();
+
+io.sockets.on('connection', function (socket) {
+	
+		console.log("Socket: " + socket);
+	
+		var address = socket.handshake.address;
+	    	console.log("New connection from " + address.address + " : " + address.port);
+	    
+	    	socket.on('userConnected', function (data) {
+	    
+			clientID = Math.floor(Math.random() * 1e6);
+			socket.clientID = clientID;
+			
+			//Session ID to client ID mapping
+			userMap[clientID] = data.sessionID;
+				
+			console.log("User map testing: " + userMap[clientID]);
 		
-    	numUsers++;
-		io.sockets.emit('userCountUpdate', {count: numUsers});
-		
-   		console.log("Numbers of users: " + numUsers);
-		
-    });
+		    		if (numUsers < 1){
+		    			io.sockets.emit('loginResponse', {response: "First person joined", map: userMap, myClientID: clientID, userCount: numUsers, speedArray: speedArrayServer});
+		    		} else if (numUsers > 0){
+		    			io.sockets.emit('loginResponse', {response: "Second person joined", map: userMap, myClientID: clientID, userCount: numUsers, speedArray: speedArrayServer});
+					console.log("Maximum number of users reached");
+		    		} else {
+		    			console.log("Nothing to do");
+		    		}
+			
+	    		numUsers++;
+			io.sockets.emit('userCountUpdate', {count: numUsers});
+			
+	   		console.log("Numbers of users: " + numUsers);
+			
+		});
 	
 	socket.on('leapData', function (data) {
-	
-		console.log("Incoming ID: " + data.id + ' incoming coordinates: ' + data.coord);
-	
-		//Only transmit when more than one person has joined
-		if (numUsers > 1){
-			io.sockets.emit('sendOutData', data);
-		}
 		
-    });
+			console.log("Incoming ID: " + data.id + ' incoming coordinates: ' + data.coord);
+		
+			//Only transmit when more than one person has joined
+			if (numUsers > 1){
+				io.sockets.emit('sendOutData', data);
+			}
+			
+		});
 	
 	socket.on('disconnect', function(data) {
+		
+	        console.log('Someone disconnected!');
+		  
+		console.log("This person disconnected: " + this.clientID);
+		delete userMap[this.clientID];
 	
-      console.log('Someone disconnected!');
-	  
-	  console.log("This person disconnected: " + this.clientID);
-	  delete userMap[this.clientID];
-
-      numUsers -= 1;
-
-	  console.log("New number of users: " + numUsers);
-	  io.sockets.emit('userCountUpdate', {count: numUsers});
-	  
-   });
+	        numUsers -= 1;
+	
+		console.log("New number of users: " + numUsers);
+		io.sockets.emit('userCountUpdate', {count: numUsers});
+		  
+		});
 
 });
 
