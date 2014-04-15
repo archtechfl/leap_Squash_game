@@ -95,11 +95,27 @@ io.sockets.on('connection', function (socket) {
 	
 	socket.on('leapData', function (data) {
 		
+			var dataHolder = {};
 			console.log("Incoming ID: " + data.id + ' incoming coordinates: ' + data.coord);
-		
+			
+			dataHolder[data.id] = data.coord;
+			
+			/* Debug */
+			/*
+			for (var key in dataHolder){
+				console.log(key);
+				console.log("Temp data: " + dataHolder[key]);
+			}
+			*/
+			
 			//Only transmit when more than one person has joined
 			if (numUsers > 1){
-				io.sockets.emit('sendOutData', data);
+				//io.sockets.emit('sendOutData', data);
+				for (var key in opponentMap){
+					var ID_OPPOS = opponentMap[data.id];
+					destination = userMap[ID_OPPOS];
+					io.sockets.socket(destination).emit('sendOutData', dataHolder[data.id]);
+				}
 			}
 			
 		});
