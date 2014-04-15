@@ -12,12 +12,15 @@ var numUsers = 0;
 var clientID = 0;
 
 var userMap = {};
-var playerMap = {};
+var opponentMap = {};
+var keyTemp = [];
 
 var speedArrayServer = [];
 
 var player1;
 var player2;
+
+var lastID = 0;
 
 var playerNames = ["player1","player2"];
 
@@ -52,14 +55,31 @@ io.sockets.on('connection', function (socket) {
 			socket.clientID = clientID;
 			
 			//Session ID to client ID mapping
+			lastID = data.sessionID;
 			userMap[clientID] = data.sessionID;
+			
+			keyTemp = [];
+			if (numUsers > 0){
+				for (var key in userMap){
+					keyTemp.push(key);
+					console.log(keyTemp);
+				}
+				
+				opponentMap[keyTemp[0]] = keyTemp[1];
+				opponentMap[keyTemp[1]] = keyTemp[0];
+				console.log(keyTemp[1]);
+				console.log(opponentMap[keyTemp[0]]);
+				console.log(keyTemp[0]);
+				console.log(opponentMap[keyTemp[1]]);
+				
+			}
 				
 			console.log("User map testing: " + userMap[clientID]);
 		
 		    		if (numUsers < 1){
 		    			io.sockets.emit('loginResponse', {response: "First person joined", map: userMap, myClientID: clientID, userCount: numUsers, speedArray: speedArrayServer, player:playerNames[0]});
 		    		} else if (numUsers > 0){
-		    			io.sockets.emit('loginResponse', {response: "Second person joined", map: userMap, myClientID: clientID, userCount: numUsers, speedArray: speedArrayServer, player:playerNames[1]});
+		    			io.sockets.socket(lastID).emit('loginResponse', {response: "Second person joined", map: userMap, myClientID: clientID, userCount: numUsers, speedArray: speedArrayServer, player:playerNames[1]});
 					console.log("Maximum number of users reached");
 		    		} else {
 		    			console.log("Nothing to do");
