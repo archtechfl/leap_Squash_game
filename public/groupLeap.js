@@ -65,7 +65,7 @@ window.onload = function() {
 	
 		//If user count drops below 2, do not transmit until someone joins again
 		if (theUserCount > 1){
-			socket.emit('leapData', { id: myUserID, coord: coordinates });
+			socket.emit('leapData', { id: myClient, coord: coordinates });
 			
 		}//end of user count > 1
 	}
@@ -88,7 +88,6 @@ window.onload = function() {
     socket.on('loginResponse', function (data) 
     	{
     	
-    	//	console.log("login response: " + data.response);
 			myClient = data.myClientID;
 			
 			myPlayer = data.player;
@@ -103,6 +102,7 @@ window.onload = function() {
 			ySpeed = speedArray[1];
 			zSpeed = speedArray[2];
 			
+			/*
 			//People only start transmitting their info to the server once two players have joined
 			if (userCount > 0){
 				setInterval(sendData, (1000/15));
@@ -111,10 +111,27 @@ window.onload = function() {
 				takeALeap();
 				drawCourt();
 				addPaddles();
-				//setSpeed();
 				render();
 				
 			}
+			*/
+    		
+    	});
+		
+		socket.on('startGame', function (data) 
+    	{
+    	
+			message = data.response;
+			
+			console.log(message);
+			
+			setInterval(sendData, (1000/15));
+			//console.log("Initializing all functions");
+			init();
+			takeALeap();
+			drawCourt();
+			addPaddles();
+			render();
     		
     	});
     	
@@ -374,7 +391,7 @@ function movePaddle() {
 	paddle1.position.x = xPos * 0.3;
 	paddle1.position.y = (yPos * 0.11) + (courtBottom * vAF);
 	paddle1.position.z = (zPos - 80) * 0.2;
-	console.log("paddle z position: " + paddle1.position.z);
+	//console.log("paddle z position: " + paddle1.position.z);
 	
 }//end move paddle
 
