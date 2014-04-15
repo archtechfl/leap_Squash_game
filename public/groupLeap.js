@@ -38,6 +38,9 @@ window.onload = function() {
 	xPos = 0,
 	yPos = 0,
 	zPos = 0,
+	xPosOp = 0,
+	yPosOp = 0,
+	zPosOp = 0,
 	frame,
 	controller,
 	speedArray,
@@ -81,7 +84,11 @@ window.onload = function() {
 	socket.on('sendOutData', function (data) 
     	{
     	
-    		//console.log("Data: " + data.id + ' ' + data.coord[0]);
+    		console.log("Opponent X: " + data[0]);
+			
+			xPosOp = data[0];
+			yPosOp = data[1];
+			zPosOp = data[2];
 
     	});
 			
@@ -350,6 +357,11 @@ function movement()
 			        currentScore1++;
 			        PlaySound('bonk.mp3');
 			        matchScoreCheck();
+					
+					console.log("hit!");
+					paddle1.material.color.setHex(0x00ff00);
+					var changeColor = setTimeout(function() {restoreColor("paddle1")}, 500);
+					
 			        // stretch the paddle to indicate 
 			        // switch direction of ball travel to create bounce
 			        zSpeed *= -1;
@@ -361,7 +373,47 @@ function movement()
 			      }
 			    }
 			  }//paddle1 1 end
+			  
+			  if (ball.children[0].position.x <= paddle2.position.x + paddleWidth
+			  &&  ball.children[0].position.x >= paddle2.position.x)
+			  {
+			    // and if ball is aligned with paddle2 on y plane
+			    if (ball.children[0].position.y <= paddle2.position.y + paddleHeight/2
+			    &&  ball.children[0].position.y >= paddle2.position.y - paddleHeight/2)
+			    {
+			    if (ball.children[0].position.z >= paddle2.position.z - ((paddleDepth/2) - ballRadius)){
+			      // and if ball is travelling towards player 
+			      if (zSpeed > 0)
+			      {
+			        currentScore2++;
+			        PlaySound('bonk.mp3');
+			        matchScoreCheck();
+					console.log("hit!");
+					
+					paddle2.material.color.setHex(0x00ff00);
+					var changeColor = setTimeout(function() {restoreColor("paddle2")}, 500);
+					
+			        // stretch the paddle to indicate 
+			        // switch direction of ball travel to create bounce
+			        zSpeed *= -1;
+			        document.getElementById("player2score").innerHTML = currentScore2;
+			        // we impact ball angle when hitting it
+			        // this is not realistic physics, just spices up the gameplay
+			        // allows you to 'slice' the ball to beat the opponent
+			      	}
+			      }
+			    }
+			  }//paddle2 end
+			  
 }//end of movement
+
+function restoreColor(paddle) {
+	if (paddle == 'paddle1'){
+	paddle1.material.color.setHex( 0x1b32c0 );
+	} else {
+	paddle2.material.color.setHex( 0x521b6b );
+	}
+}
 
 function matchScoreCheck() {
   if (currentScore1 >= maxScore)
@@ -388,10 +440,26 @@ function matchScoreCheck() {
 function movePaddle() {
 	
 	var vAF = 1.7;
-	paddle1.position.x = xPos * 0.3;
-	paddle1.position.y = (yPos * 0.11) + (courtBottom * vAF);
-	paddle1.position.z = (zPos - 80) * 0.2;
-	//console.log("paddle z position: " + paddle1.position.z);
+	
+	if (myPlayer == 'player1'){
+		paddle1.position.x = xPos * 0.3;
+		paddle1.position.y = (yPos * 0.11) + (courtBottom * vAF);
+		paddle1.position.z = (zPos - 100) * 0.1;
+		
+		paddle2.position.x = xPosOp * 0.3;
+		paddle2.position.y = (yPosOp * 0.11) + (courtBottom * vAF);
+		paddle2.position.z = (zPosOp - 100) * 0.1;
+		
+	} else {
+		paddle2.position.x = xPos * 0.3;
+		paddle2.position.y = (yPos * 0.11) + (courtBottom * vAF);
+		paddle2.position.z = (zPos - 100) * 0.1;
+		
+		paddle1.position.x = xPosOp * 0.3;
+		paddle1.position.y = (yPosOp * 0.11) + (courtBottom * vAF);
+		paddle1.position.z = (zPosOp - 100) * 0.1;
+		
+	}
 	
 }//end move paddle
 
