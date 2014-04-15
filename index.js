@@ -24,8 +24,8 @@ function setSpeed () {
 		ySpeed = Math.random() * 1;
 		
 		speedArrayServer.push(xSpeed);
-		speedArrayServer.push(zSpeed);
 		speedArrayServer.push(ySpeed);
+		speedArrayServer.push(zSpeed);
 
 		console.log("x speed: " + xSpeed + " y speed: " + ySpeed  + " z speed: " + zSpeed);
 
