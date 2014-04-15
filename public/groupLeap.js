@@ -44,7 +44,8 @@ window.onload = function() {
 	xSpeed,
 	ySpeed,
 	zSpeed,
-	ballRadius;
+	ballRadius,
+	myPlayer = '';
 	
     socket.on('connect', function () 
     	{
@@ -89,6 +90,10 @@ window.onload = function() {
     	
     	//	console.log("login response: " + data.response);
 			myClient = data.myClientID;
+			
+			myPlayer = data.player;
+			
+			console.log("my player is: " + myPlayer);
 			
 			var userCount = data.userCount;
 			
