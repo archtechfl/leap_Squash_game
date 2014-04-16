@@ -13,14 +13,22 @@
   <script src='leapjs/leap.js'></script>
 </head>
 <body>
-  <div id="score">
-    <div id="player1score">1</div>
-    <div id="player2score">2</div>
-    <div id="gameTitle">Crazy Pong!</div>
 
-  </div>
-
-  <div id="display"></div>
+  <nav>
+		<h1>Crazy Pong!</h1>
+		<span class="player" id="label_one">Player 1</span>
+		<span class="score" id="player1score">0</span>
+		<span class="sep"></span>
+		<span class="score" id="player2score">0</span>
+		<span class="player" id="label_two">Player 2</span>
+		<span class="time">TIME</span>
+	</nav>
+	<div id="window">
+		<h2>Crazy Pong!</h2>
+		<p>Multiplayer Leap/ThreeJS/nodeJS craziness</p>
+		<button id="play">Let's Play</button>
+		<button id="instruct">Instructions</button>
+	</div>
   
 </body>
 </html>
