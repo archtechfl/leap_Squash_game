@@ -17,11 +17,10 @@ window.onload = function() {
 	ySpeed, 
 	courtWidth, 
 	courtDepth,
-	courtXStart,
-	courtXEnd,
 	zPosCourt, 
 	yPosCourt, 
 	courtTop,
+	cameraZ,
 	/*Paddle variables*/
 	paddleWidth,
 	paddleHeight,
@@ -267,37 +266,19 @@ function init(){
 		
 		//Lighting for the scene, two lights from different sides
 		
-		/*
-		var directionalLight = new THREE.DirectionalLight( 0xffffff, 0.5 );
-		directionalLight.position.set(-5, 0, 5);
-		scene.add( directionalLight );
-	
-		var directionalLight2 = new THREE.DirectionalLight( 0xffffff, 0.5 );
-		directionalLight2.position.set(5, 0, 5);
-		scene.add( directionalLight2 );
-		
-		var directionalLight3 = new THREE.DirectionalLight( 0xffffff, 0.5 );
-		directionalLight3.position.set(0, -5, 50);
-		scene.add( directionalLight3 );
-		
-		var directionalLight4 = new THREE.DirectionalLight( 0xffffff, 0.5 );
-		directionalLight4.position.set(0, 5, 50);
-		scene.add( directionalLight4 );
-		*/
-		
 		var light = new THREE.PointLight( 0xffffff, 1, 400 );
 		light.position.set( 0, 0, 50 );
 		scene.add( light );
 		
 		geometry = new THREE.SphereGeometry( ballRadius, 32, 32 );
 
-		material = new THREE.MeshLambertMaterial( { color: 0xBABABA, wireframe: false} );
-		material_ball = new THREE.MeshLambertMaterial( { color: 0xCC0000, wireframe: false} );
+		material = new THREE.MeshLambertMaterial( { color: 0xBABABA, wireframe: false, side: THREE.DoubleSide} );
+		material_ball = new THREE.MeshLambertMaterial( { color: 0xCC0000, wireframe: false, side: THREE.DoubleSide} );
 
 		// create the paddle1's material
-		var paddle1Material = new THREE.MeshLambertMaterial({color: 0x1B32C0, wireframe: true});
+		var paddle1Material = new THREE.MeshLambertMaterial({color: 0x1B32C0, wireframe: false, side: THREE.DoubleSide});
   		// create the paddle2's material
-		var paddle2Material = new THREE.MeshLambertMaterial({color: 0x521B6B, wireframe: true});
+		var paddle2Material = new THREE.MeshLambertMaterial({color: 0x521B6B, wireframe: false, side: THREE.DoubleSide});
 
 		paddleWidth = 10;
 	 	paddleHeight = 8;
@@ -351,61 +332,30 @@ function drawCourt () {
 	//console.log("drawCourt");
 
 	courtWidth = 50;
-	courtXStart = -(courtWidth/2);
-	courtXEnd = (courtWidth/2);
+	var courtWidthDraw = 50 + (ballRadius * 2);
 	courtDepth = courtWidth * 1.7;
-	zPosCourt = 0;
+	cameraZ = 20;
+	var courtDepthDraw = courtDepth + ballRadius + (cameraZ + 10);
 	courtBottom = -12;
 	yPosCourt = courtBottom;
+	zPosCourt = 0;
+	var yPosCourtDraw = courtBottom - ballRadius;
 	var courtHeight = 24;
+	var courtHeightDraw = courtHeight + (2 * ballRadius);
 	courtTop = yPosCourt + courtHeight;
 	
-	for (i=0; i <= 1; i++){
+	var courtGeometry = new THREE.CubeGeometry( courtWidthDraw, courtHeightDraw, courtDepthDraw );
+	var courtBounds = new THREE.Mesh( courtGeometry, material );
 	
-		
-		console.log("Create top and bottom");
-		var rectShape = new THREE.Shape();
-		rectShape.moveTo( 0,0 );
-		rectShape.lineTo( 0, courtDepth );
-		rectShape.lineTo( courtWidth, courtDepth );
-		rectShape.lineTo( courtWidth, 0 );
-		rectShape.lineTo( 0, 0 );
-
-		var rectGeom = new THREE.ShapeGeometry( rectShape );
-		var rectMesh = new THREE.Mesh( rectGeom, material );	
-
-		rectMesh.position.set( -(courtWidth/2), yPosCourt, zPosCourt );
-		rectMesh.rotation.set( ((2 * Math.PI) * -0.25), 0, 0);
-
-		court.add( rectMesh );
-		yPosCourt += courtHeight;
-		
-	}
+	console.log( -(courtDepthDraw/2) + (cameraZ + 10) );
 	
-	for (i=0; i <= 1; i++){
-		
-		console.log("Create left and right");
-		var rectShape = new THREE.Shape();
-		rectShape.moveTo( 0,0 );
-		rectShape.lineTo( 0, courtDepth );
-		rectShape.lineTo( courtHeight, courtDepth );
-		rectShape.lineTo( courtHeight, 0 );
-		rectShape.lineTo( 0, 0 );
+	courtBounds.position.set( 0, 0, -28.125 );
 	
-		var rectSide = new THREE.ShapeGeometry( rectShape );
-		var rectSideMesh = new THREE.Mesh( rectSide, material );
-	
-		rectSideMesh.position.set( courtXStart, courtBottom, zPosCourt );
-		rectSideMesh.rotation.set( ((2 * Math.PI) * -0.25), ((2 * Math.PI) * -0.25), 0);
-	
-		court.add( rectSideMesh );
-		courtXStart += courtWidth;
-		
-	}
+	court.add( courtBounds );
 
 	scene.add( court );
 
-	camera.position.z = 20;
+	camera.position.z = cameraZ;
 	camera.position.y = 0;
 	camera.position.x = 0;
 	
@@ -421,10 +371,10 @@ function addPaddles() {
 
 	// set paddles on each side of the table
 	paddle1.position.x = -courtWidth/2 + paddleWidth;
-        paddle2.position.x = courtWidth/2 - paddleWidth;
+    paddle2.position.x = courtWidth/2 - paddleWidth;
 
-       	// lift paddles over playing surface
-        paddle1.position.y = courtBottom + paddleHeight;
+    // lift paddles over playing surface
+    paddle1.position.y = courtBottom + paddleHeight;
 	paddle2.position.y = courtBottom + paddleHeight;
 
 	paddle1.position.z = zPosCourt - (2 * paddleDepth);
@@ -463,7 +413,7 @@ function movement()
 					ySpeed *= -1;
 				} 		
 
-			if (ball.children[0].position.z  <= (-1 * courtDepth) || ball.children[0].position.z  >= (zPosCourt + 20))
+			if (ball.children[0].position.z  <= (-1 * courtDepth) || ball.children[0].position.z  >= (zPosCourt + 30))
 				{
 					zSpeed *= -1;
 				} 
