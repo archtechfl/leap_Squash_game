@@ -1,5 +1,5 @@
 window.onload = function() {
-    	var socket = io.connect('142.55.34.84:3700');
+    	var socket = io.connect('your_Machines_Local_IP_Goes_Here:3700');
     	var userID = 0;
 	var myClient = 0;
 	var theUserCount = 0;
@@ -208,19 +208,14 @@ window.onload = function() {
 		
 			console.log("starting game");
 			
-			//message = data.response;
-			
 			remove();
     		
     	});
     	
 function takeALeap() {
-	
-	//console.log("takeALeap");
     	
 	controller.on( 'frame' , function( data ){
 
-	      		//console.log("frame");
 	      		//Capture data
 	      		frame = data;
 
@@ -229,19 +224,10 @@ function takeALeap() {
 
 				var hand = frame.hands[0];
 
-				//console.log("Number of hands: " + frame.hands.length);
-				//console.log("Number of fingers: " + frame.fingers.length);
-
 				//Conver tip position to cube position
 				xPos = hand.palmPosition[0];
 				yPos = hand.palmPosition[1];
 				zPos = hand.palmPosition[2];
-				
-				//console.log(zPos);
-
-				//console.log(yPos);
-
-				//console.log("x: " + xPos + " y: " + yPos + " z: " + zPos);
 
 			  }
 
@@ -347,9 +333,7 @@ function drawCourt () {
 	var courtGeometry = new THREE.CubeGeometry( courtWidthDraw, courtHeightDraw, courtDepthDraw );
 	var courtBounds = new THREE.Mesh( courtGeometry, material );
 	
-	console.log( -(courtDepthDraw/2) + (cameraZ + 10) );
-	
-	courtBounds.position.set( 0, 0, -28.125 );
+	courtBounds.position.set( 0, 0, (-(courtDepthDraw/2) + (cameraZ + 10)) );
 	
 	court.add( courtBounds );
 
