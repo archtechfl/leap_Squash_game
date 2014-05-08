@@ -36,3 +36,10 @@ Steps to get up and running
 12) Your opponent should navigate to yourIP:3700/gamePlay.html to start
 
 13) Once both players have clicked "Let's play", a 3 second countdown will begin and then the game will start
+
+
+Lead Developer: Jeremy Moore
+Intro Screens: Michael Woloszuk
+Collision Detection: Anna Roginska
+
+
