@@ -1,5 +1,5 @@
 window.onload = function() {
-    	var socket = io.connect('your_Machines_Local_IP_Goes_Here:3700');
+    	var socket = io.connect('your_IP:3700');
     	var userID = 0;
 	var myClient = 0;
 	var theUserCount = 0;
