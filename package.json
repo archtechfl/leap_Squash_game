@@ -1,0 +1,13 @@
+{
+  "name": "Leap Squash",
+  "version": "1.0.0",
+  "description": "A 3D squash game using nodeJS, leapJS, and threeJS",
+  "author": "Jeremy Moore <jeremy@moremooredesign.com>",
+  "dependencies": {
+    "leapJS": "latest",
+    "three": "latest",
+    "socket.io": "latest",
+    "express": "latest"
+  },
+  "engine": "node >= 0.10.0"
+}
